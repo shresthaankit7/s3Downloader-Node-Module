@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "aws-sdk": "^2.291.0",
+    "express": "^4.16.3",
+    "s3": "^4.4.0",
+    "uuid": "^3.3.2"
+  },
+  "name": "s3Downloader",
+  "description": "Downloading file from s3",
+  "version": "1.0.1",
+  "main": "Main.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ankit Shrestha",
+  "license": "ISC"
+}
