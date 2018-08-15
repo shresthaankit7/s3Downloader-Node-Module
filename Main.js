@@ -1,3 +1,4 @@
+var config = require('config');
 var http = require('http');
 var AWS = require('aws-sdk');
 var uuid = require('uuid');
@@ -7,17 +8,15 @@ var express = require('express');
 var app = express();
 
 
-var bucketName = 'myBucketName';
-var keyName = 'myKeyPath/file.txt';
+var bucketName = config.get('s3Config.bucketName');
+var keyName = config.get('s3Config.keyName');
+var localFilePath = config.get('filePathConfig.localFilePath');
 
 
 var credentials = new AWS.SharedIniFileCredentials();
-
 var s3client = s3.createClient(credentials);
-
-
 var params = {
-	localFile: "/home/ankshrestha/Desktop/fromS3Node.txt",
+	localFile: localFilePath,
 	s3Params:{
 		Bucket: bucketName,
 		Key: keyName,
@@ -28,7 +27,6 @@ var downloader = s3client.downloadFile(params);
 downloader.on('error',function(err){
 	console.error("unable to download: ",err.stack);
 });
-
 downloader.on('progress', function(){
 	console.log("progress", downloader.progressAmount,downloader.progressTotal);
 });
@@ -37,11 +35,11 @@ downloader.on('end',function(){
 });
 
 
-app.get('/',function(req,res){
+app.get('/download',function(req,res){
 	console.log("Downloading File......");
-	res.download("/home/ankshrestha/Desktop/fromS3Node.txt");
+	res.download(localFilePath);
 });
 
-app.listen(8080);
+app.listen(config.get('serverConfig.port'),config.get('serverConfig.host'));
 
 

@@ -1,0 +1,13 @@
+{
+  "serverConfig":{
+	"host":"10.0.104.51",
+	"port":8080
+  },
+  "s3Config": {
+      "bucketName": "myBucketName",
+      "keyName": "myFileKeyName"
+    },
+    "filePathConfig": {
+      "localFilePath": "somePathInServer"
+    }
+}
